@@ -33,5 +33,5 @@ The JavaScript does a couple of things:
 
 3. It removes the `ajax_module_loading` class from the target `div`. and then fills the `div` with the content rendered by the template.
 
-In addition to passing whatever data you supply in `$args`, the Post ID of the current global `$post` object is also submitted. (You can override this by setting `post_id` in `$args`.) The Post identified this way is loaded into a variable named `$post`, and is made available to your module template.
+In addition to passing whatever data you supply in `$args`, the Post ID of the current global `$post` object is also submitted. (You can override this by setting `post_id` in `$args`.) Your module template can then access this post via `$post`.
 
