@@ -58,15 +58,15 @@ class MoreTemplates {
     if (isset(self::$modules[$fx_name])) {
       ?>
         <script>
-          (function($) {
-            window.__am__ = window.__am__ ? window.__am__ : { c: 0 };
+          (function($, D, W) {
+            W.__am__ = W.__am__ ? W.__am__ : { c: 0 };
             var id = __am__.c++;
-            document.write('<div id="mod_'+id+'" class="ajax_module_<?php echo $template ?> ajax_module_loading"></div>');
+            D.write('<div id="mod_'+id+'" class="ajax_module_<?php echo $template ?> ajax_module_loading"></div>');
             var args = $.extend({ action: 'mod_<?php echo $template ?>', post_id: '<?php echo get_the_ID() ?>' }, <?php echo json_encode($args) ?>);
             jQuery.post('<?php echo admin_url('admin-ajax.php') ?>', args, function(html) {
               $('#mod_'+id).removeClass('ajax_module_loading').html(html);
             });
-          })(jQuery);
+          })(jQuery, document, window);
         </script>
       <?php
     } else {
