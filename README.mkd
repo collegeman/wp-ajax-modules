@@ -1,0 +1,37 @@
+A plugin for WordPress that adds additional template features to any theme, namely:
+
+* The ability to lazy-load modules via the WordPress AJAX pattern
+* The ability to override various e-mail templates
+
+## Using lazy-loaded modules
+
+Sometimes you want to lazy-load content. Installing this plugin provides a new template function:
+
+    get_ajax_module( $template, $args );
+    
+Where `$template` identifies a template part in your theme named `modules/{$template}.php`, and `$args` is an associative array of data that you want to be available to that template part when it renders.
+
+Calling this function prints a snippet of JavaScript into the pages on which you call it, e.g.,
+
+    <script> 
+      (function($) {
+        window.__am__ = window.__am__ ? window.__am__ : { c: 0 };
+        var id = __am__.c++;
+        document.write('<div id="mod_'+id+'" class="ajax_module_test ajax_module_loading"></div>');
+        var args = $.extend({ action: 'mod_test', post_id: '286' }, null);
+        jQuery.post('http://yoursite.com/workbench/wp-admin/admin-ajax.php', args, function(html) {
+          $('#mod_'+id).removeClass('ajax_module_loading').html(html);
+        });
+      })(jQuery);
+    </script>
+    
+The JavaScript does a couple of things:
+
+1. It creates an empty `div` with classes `ajax_module_{$template}` and `ajax_module_loading`.
+
+2. It generates an AJAX-request back to your WP site to load the template.
+
+3. It removes the `ajax_module_loading` class from the target `div`. and then fills the `div` with the content rendered by the template.
+
+In addition to passing whatever data you supply in `$args`, the Post ID of the current global `$post` object is also submitted. (You can override this by setting `post_id` in `$args`.) The Post identified this way is loaded into a variable named `$post`, and is made available to your module template.
+
