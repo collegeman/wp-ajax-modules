@@ -9,7 +9,7 @@ class MoreTemplates {
   
   private function __construct() {
     add_action('init', array($this, 'init'));
-    add_action('wp_footer', create_function('', 'get_ajax_module("test");') );
+    //add_action('wp_footer', create_function('', 'get_ajax_module("test");') );
   }
   
   private static $modules = array();
