@@ -11,7 +11,7 @@ Sometimes you want to lazy-load content. Installing this plugin provides a new t
     
 Where `$template` identifies a template part in your theme named `modules/{$template}.php`, and `$args` is an associative array of data that you want to be available to that template part when it renders.
 
-Calling this function prints a snippet of JavaScript into the pages on which you call it, e.g.,
+Calling this function prints a snippet of JavaScript into your page output each time you call it. It looks something like this:
 
     <script> 
       (function($) {
