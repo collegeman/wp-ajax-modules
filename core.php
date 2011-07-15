@@ -1,10 +1,10 @@
 <?php
-class MoreTemplates {
+class AjaxModules {
   
   static $instance;
   
   static function load() {
-    return self::$instance ? self::$instance : ( self::$instance = new MoreTemplates() );
+    return self::$instance ? self::$instance : ( self::$instance = new AjaxModules() );
   }
   
   private function __construct() {
@@ -80,9 +80,9 @@ class MoreTemplates {
 if (!function_exists('get_ajax_module')):
 
 function get_ajax_module($template, $args = null) {
-  return MoreTemplates::load()->get_ajax_module($template, $args);
+  return AjaxModules::load()->get_ajax_module($template, $args);
 }
 
 endif; // !function_exists('get_ajax_module')
 
-MoreTemplates::load();
+AjaxModules::load();
